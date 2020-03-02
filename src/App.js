@@ -1,26 +1,68 @@
 import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import ArticleList from './components/ArticleList'
+import ArticleForm from './components/ArticleForm'
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+class App extends React.Component {
+  constructor(props) {
+    super(props)
+    this.state = {
+      showForm: false,
+      articles: [
+        {
+          id: 1,
+          title: 'First Article',
+          body: 'Hello World'
+        },
+        {
+          id: 2,
+          title: 'Welcome',
+          body: 'Welcome to react world'
+        },
+      ]
+    }
+  }
+
+  addArticle = (article) => {
+    this.setState({
+      articles: [
+        ...this.state.articles,
+        {
+          id: this.state.articles[this.state.articles.length - 1]?.id || 0 + 1,
+          ...article
+        }
+      ]
+    })
+  }
+
+  toggleShowForm = () => {
+    this.setState(state => {
+      return {
+        showForm: !state.showForm
+      }
+    })
+  }
+
+  render() {
+    return (
+      <div className="flex container mx-auto pt-8">
+        <div className="w-3/5">
+          <ArticleList articles={this.state.articles} />
+        </div>
+        <div className="w-2/5">
+          <button
+            className="border border-black rounded py-2 px-3 mb-6"
+            onClick={this.toggleShowForm}
+          >
+            {this.state.showForm ? 'HIDE FORM' : 'SHOW FORM'}
+          </button>
+          {
+            this.state.showForm
+            && <ArticleForm addArticle={this.addArticle} />
+          }
+        </div>
+      </div>
+    )
+  }
 }
 
 export default App;
