@@ -2,18 +2,6 @@ import React, { Component } from 'react'
 import ArticleItem from './ArticleItem'
 
 class ArticleList extends Component {
-  componentDidMount() {
-
-  }
-
-  componentDidUpdate() {
-
-  }
-
-  componentWillUnmount() {
-
-  }
-
   render() {
     return (
       <div className="pr-6">

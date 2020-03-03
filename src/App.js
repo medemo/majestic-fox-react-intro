@@ -1,12 +1,14 @@
 import React from 'react';
 import ArticleList from './components/ArticleList'
 import ArticleForm from './components/ArticleForm'
+import ChatBox from './components/ChatBox'
+
 
 class App extends React.Component {
   constructor(props) {
     super(props)
     this.state = {
-      showForm: false,
+      showChatBox: false,
       articles: [
         {
           id: 1,
@@ -27,18 +29,10 @@ class App extends React.Component {
       articles: [
         ...this.state.articles,
         {
-          id: this.state.articles[this.state.articles.length - 1]?.id || 0 + 1,
+          id: (this.state.articles[this.state.articles.length - 1]?.id || 0) + 1,
           ...article
         }
       ]
-    })
-  }
-
-  toggleShowForm = () => {
-    this.setState(state => {
-      return {
-        showForm: !state.showForm
-      }
     })
   }
 
@@ -49,16 +43,22 @@ class App extends React.Component {
           <ArticleList articles={this.state.articles} />
         </div>
         <div className="w-2/5">
-          <button
-            className="border border-black rounded py-2 px-3 mb-6"
-            onClick={this.toggleShowForm}
-          >
-            {this.state.showForm ? 'HIDE FORM' : 'SHOW FORM'}
-          </button>
-          {
-            this.state.showForm
-            && <ArticleForm addArticle={this.addArticle} />
-          }
+          <div className="mb-10">
+            <h1 className="text-xl mb-2 uppercase font-semibold">Post an article</h1>
+            <ArticleForm addArticle={this.addArticle} />
+          </div>
+          <div>
+            <button
+              className="border border-black rounded py-2 px-3 mb-6"
+              onClick={() => this.setState(state => ({ showChatBox: !state.showChatBox }))}
+            >
+              {this.state.showChatBox ? 'HIDE CHATBOX' : 'SHOW CHATBOX'}
+            </button>
+            {
+              this.state.showChatBox
+              && <ChatBox />
+            }
+          </div>
         </div>
       </div>
     )
