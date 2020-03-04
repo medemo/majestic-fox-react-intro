@@ -1,66 +1,37 @@
 import React from 'react';
-import ArticleList from './components/ArticleList'
-import ArticleForm from './components/ArticleForm'
-import ChatBox from './components/ChatBox'
+import { Provider } from 'react-redux'
+import { BrowserRouter as Router, Switch, Route } from 'react-router-dom'
+import store from './store'
+import HomePage from './containers/HomePage'
+import ArticlePage from './containers/ArticlePage'
+// import ChatRoomPage from './containers/ChatRoomPage'
+import Navbar from './components/Navbar'
 
 
 class App extends React.Component {
-  constructor(props) {
-    super(props)
-    this.state = {
-      showChatBox: false,
-      articles: [
-        {
-          id: 1,
-          title: 'First Article',
-          body: 'Hello World'
-        },
-        {
-          id: 2,
-          title: 'Welcome',
-          body: 'Welcome to react world'
-        },
-      ]
-    }
-  }
-
-  addArticle = (article) => {
-    this.setState({
-      articles: [
-        ...this.state.articles,
-        {
-          id: (this.state.articles[this.state.articles.length - 1]?.id || 0) + 1,
-          ...article
-        }
-      ]
-    })
-  }
-
   render() {
     return (
-      <div className="flex container mx-auto pt-8">
-        <div className="w-3/5">
-          <ArticleList articles={this.state.articles} />
-        </div>
-        <div className="w-2/5">
-          <div className="mb-10">
-            <h1 className="text-xl mb-2 uppercase font-semibold">Post an article</h1>
-            <ArticleForm addArticle={this.addArticle} />
+      <Provider store={store}>
+        <Router>
+          <div className="container mx-auto">
+            <Navbar />
+            <div className="flex">
+              <Switch>
+                <Route path="/article/:articleId">
+                  <ArticlePage />
+                </Route>
+                <Route path="/chatroom">
+                  {/* <ChatRoomPage /> */}
+                  <h1>Chatroom</h1>
+                </Route>
+                <Route path="/">
+                  <HomePage />
+                </Route>
+              </Switch>
+            </div>
           </div>
-          <div>
-            <button
-              className="border border-black rounded py-2 px-3 mb-6"
-              onClick={() => this.setState(state => ({ showChatBox: !state.showChatBox }))}
-            >
-              {this.state.showChatBox ? 'HIDE CHATBOX' : 'SHOW CHATBOX'}
-            </button>
-            {
-              this.state.showChatBox
-              && <ChatBox />
-            }
-          </div>
-        </div>
-      </div>
+        </Router>
+      </Provider>
     )
   }
 }

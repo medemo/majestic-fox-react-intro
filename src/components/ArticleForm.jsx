@@ -1,18 +1,21 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState } from 'react'
+import { useDispatch } from 'react-redux'
 
 
 function ArticleForm(props) {
   const [title, setTitle] = useState('')
   const [body, setBody] = useState('')
 
-  useEffect(() => {
-  }, [])
+  const dispatch = useDispatch()
 
   const handleSubmit = event => {
     event.preventDefault()
-    props.addArticle({
-      title,
-      body
+    dispatch({
+      type: 'ADD_ARTICLE',
+      article: {
+        title,
+        body
+      }
     })
     setTitle('')
     setBody('')
@@ -48,6 +51,8 @@ function ArticleForm(props) {
     </form>
   )
 }
+
+export default ArticleForm
 
 // class ArticleForm extends React.Component {
 //   constructor(props) {
@@ -120,5 +125,3 @@ function ArticleForm(props) {
 //     )
 //   }
 // }
-
-export default ArticleForm

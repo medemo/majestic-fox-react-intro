@@ -1,11 +1,9 @@
 import React, { useState } from 'react'
 import socket from '../services/socket'
-import useSocketMessages from '../hooks/useSocketMessages'
 
-function Chat(props) {
+function ChatBox(props) {
   const [text, setText] = useState('')
 
-  const messages = useSocketMessages()
 
   const handleSubmit = event => {
     event.preventDefault()
@@ -32,14 +30,13 @@ function Chat(props) {
       >
         Send Message
       </button>
-      {
-        JSON.stringify(messages)
-      }
     </form>
   )
 }
 
-// class Chat extends React.Component {
+export default ChatBox
+
+// class ChatBox extends React.Component {
 //   constructor(props) {
 //     super(props)
 //     this.state = {
@@ -93,4 +90,3 @@ function Chat(props) {
 //   }
 // }
 
-export default Chat
