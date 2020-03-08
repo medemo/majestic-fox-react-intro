@@ -1,6 +1,7 @@
 import React from "react";
-import ChatBox from '../components/ChatBox'
-import useSocketMessages from '../hooks/useSocketMessages'
+
+import ChatBox from 'components/ChatBox'
+import useSocketMessages from 'hooks/useSocketMessages'
 
 const ChatRoomPage = () => {
   const messages = useSocketMessages()

@@ -12,14 +12,15 @@
     "react-router-dom": "^5.1.2",
     "react-scripts": "3.4.0",
     "redux": "^4.0.5",
-    "socket.io-client": "^2.3.0"
+    "socket.io-client": "^2.3.0",
+    "tailwindcss": "^1.2.0"
   },
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
-    "build:styles": "postcss src/tailwind.css -o src/index.css",
+    "build:styles": "tailwindcss build src/tailwind.css -o src/index.css",
     "prebuild": "NODE_ENV=production npm run build:styles",
     "prestart": "npm run build:styles"
   },
@@ -37,10 +38,5 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
-  },
-  "devDependencies": {
-    "autoprefixer": "^9.7.4",
-    "postcss-cli": "^7.1.0",
-    "tailwindcss": "^1.2.0"
   }
 }

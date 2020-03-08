@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import { useLocation, Redirect } from 'react-router-dom'
 
-import { useUser, useLogin } from '../contexts/UserContext'
+import { useUser, useLogin } from 'contexts/UserContext'
 
 const LoginPage = () => {
   const [usernameInput, setUsernameInput] = useState('')

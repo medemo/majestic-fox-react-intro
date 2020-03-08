@@ -1,5 +1,6 @@
 import React, { useState } from 'react'
-import socket from '../services/socket'
+
+import socket from 'services/socket'
 
 function ChatBox(props) {
   const [text, setText] = useState('')

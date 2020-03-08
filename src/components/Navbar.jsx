@@ -1,12 +1,13 @@
 import React, { useContext } from 'react'
 import { NavLink } from 'react-router-dom'
-import UserContext from '../contexts/UserContext'
+
+import UserContext from 'contexts/UserContext'
 
 const Navbar = () => {
   const { logout, user } = useContext(UserContext)
 
   return (
-    <nav className="mb-6 py-3 border-b">
+    <nav className="mb-6 py-3 border-b merah">
       <NavLink
         exact
         activeClassName="underline"
